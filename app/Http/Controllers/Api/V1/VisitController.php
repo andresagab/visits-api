@@ -7,6 +7,7 @@ use App\Http\Resources\V1\VisitCollection;
 use App\Http\Resources\V1\VisitResource;
 use App\Models\Visit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class VisitController extends BaseController
 {
@@ -27,7 +28,24 @@ class VisitController extends BaseController
      */
     public function store(Request $request)
     {
-        //
+        # obtener datos
+        $input = $request->all();
+
+        # validate data
+        $validator = Validator::make($input, [
+            'name' => 'required|string|max:200',
+            'email' => 'required|email|max:255',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+        ]);
+
+        if ($validator->fails())
+            return $this->send_error("Error de validación.", $validator->errors());
+
+        # crear registro
+        $visit = Visit::create($input);
+
+        return $this->send_response(new VisitResource($visit), 'Registro creado exitosamente.');
     }
 
     /**
