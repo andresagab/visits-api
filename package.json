@@ -17,5 +17,6 @@
         "vue": "^3.4.38"
     },
     "dependencies": {
+        "leaflet": "^1.9.4"
     }
 }
