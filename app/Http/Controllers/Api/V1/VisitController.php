@@ -100,8 +100,18 @@ class VisitController extends BaseController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Visit $visit)
+    public function destroy($id)
     {
-        //
+        # cargar visita
+        $visit = Visit::query()->find($id);
+
+        # si el registro no existe, enviar error
+        if (empty($visit))
+            return $this->send_error('Registro no encontrado, no es posible continuar con la petición.');
+
+        # eliminar registro
+        $visit->delete();
+
+        return $this->send_response([], 'Registro eliminado exitosamente.');
     }
 }
