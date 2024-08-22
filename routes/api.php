@@ -8,4 +8,4 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::apiResource('v1/visits', \App\Http\Controllers\Api\V1\VisitController::class)
-    ->only(['index', 'show', 'store']);
+    ->only(['index', 'show', 'store', 'update']);

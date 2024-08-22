@@ -64,9 +64,37 @@ class VisitController extends BaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Visit $visit)
+    public function update(Request $request, $id)
     {
-        //
+        # cargar visita
+        $visit = Visit::query()->find($id);
+
+        # si el registro no existe, enviar error
+        if (empty($visit))
+            return $this->send_error('Registro no encontrado, no es posible continuar con la petición.');
+
+        # obtener datos
+        $input = $request->all();
+
+        # validar datos
+        $validator = Validator::make($input, [
+            'name' => 'required|string|max:200',
+            'email' => 'required|email|max:255',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+        ]);
+
+        if ($validator->fails())
+            return $this->send_error("Error de validación.", $validator->errors());
+
+        # modificar campos
+        $visit->name = $input['name'];
+        $visit->email = $input['email'];
+        $visit->latitude = $input['latitude'];
+        $visit->longitude = $input['longitude'];
+        $visit->save();
+
+        return $this->send_response(new VisitResource($visit), 'Registro actualizado exitosamente.');
     }
 
     /**
