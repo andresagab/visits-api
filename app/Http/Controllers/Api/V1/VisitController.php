@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\BaseController;
 use App\Http\Resources\V1\VisitCollection;
+use App\Http\Resources\V1\VisitResource;
 use App\Models\Visit;
 use Illuminate\Http\Request;
 
-class VisitController extends Controller
+class VisitController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new VisitCollection(Visit::query()->latest()->paginate());
+        $per_page = $request->query('per_page', 15);
+        $data = Visit::query()->paginate($per_page);
+        $collection = new VisitCollection($data);
+
+        return $this->send_response($collection->response()->getData(true), 'Registros cargados exitosamente.');
     }
 
     /**
@@ -28,9 +33,14 @@ class VisitController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Visit $visit)
+    public function show($id)
     {
-        //
+        $visit = Visit::find($id);
+
+        if (empty($visit))
+            return $this->send_error('Registro no encontrado.');
+
+        return $this->send_response(new VisitResource($visit), 'Registro encontrado.');
     }
 
     /**
