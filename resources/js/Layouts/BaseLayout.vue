@@ -15,7 +15,7 @@ const props = defineProps({
             <slot name="header"></slot>
         </header>
 
-        <main class="flex w-full h-full bg-slate-100 p-8">
+        <main class="flex w-full min-h-screen bg-slate-100 p-8">
             <slot></slot>
         </main>
 
