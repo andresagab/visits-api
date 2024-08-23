@@ -150,7 +150,7 @@ onMounted(() => {
                                     <h3 class="font-bold text-md text-pretty break-words">{{ visit.name }}</h3>
                                 </header>
                                 <footer>
-                                    <p class="font-normal text-sm text-pretty break-words text-gray-700">{{ visit.created_at }}</p>
+                                    <p class="font-normal text-sm text-pretty break-words text-gray-700" title="Fecha de registro">{{ visit.created_at }}</p>
                                 </footer>
                             </article>
                         </li>
