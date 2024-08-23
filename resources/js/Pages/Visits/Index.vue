@@ -1,9 +1,9 @@
 <script setup>
-
 import BaseLayout from "../../Layouts/BaseLayout.vue";
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {onMounted, ref} from "vue";
+import {router} from "@inertiajs/vue3";
 
 const map_element = ref(null)
 
@@ -21,10 +21,23 @@ onMounted(() => {
 
 })
 
+const logout = () => {
+    router.post(route('logout'));
+}
+
 </script>
 
 <template>
     <BaseLayout title="Visits">
+
+        <template #header>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                Visits
+            </h2>
+            <form @submit.prevent="logout">
+                <button type="submit">Cerrar sesión</button>
+            </form>
+        </template>
 
         <div class="w-full">
             Visits page
