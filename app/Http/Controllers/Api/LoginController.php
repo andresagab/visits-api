@@ -40,7 +40,7 @@ class LoginController extends BaseController
         if ($user && Hash::check($input['password'], $user->password))
         {
             # generar token
-            $token = $user->createToken($input['device_name'], expiresAt: now()->days(7))->plainTextToken;
+            $token = $user->createToken($input['device_name'], expiresAt: now(tz: env('APP_TIMEZONE', 'America/Bogota'))->addDays(7))->plainTextToken;
             return $this->send_response(['token' => $token], 'Login exitoso.');
         }
 
