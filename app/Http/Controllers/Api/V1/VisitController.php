@@ -18,7 +18,7 @@ use OpenApi\Annotations as OA;
  * )
  *
  * @OA\Server(
- *     url="http://localhost:8000/api/v1",
+ *     url="http://localhost:8000/api",
  * )
  */
 class VisitController extends BaseController
@@ -43,7 +43,7 @@ class VisitController extends BaseController
 
     /**
      * @OA\Get(
-     *     path="/visits",
+     *     path="/v1/visits",
      *     summary="Obtener todos los registros.",
      *     tags={"Visits"},
      *     security={{"sanctum": {}}},
@@ -94,7 +94,7 @@ class VisitController extends BaseController
 
     /**
      * @OA\Post(
-     *      path="/visits",
+     *     path="/v1/visits",
      *      summary="Crear un nuevo registro.",
      *      tags={"Visits"},
      *      @OA\RequestBody(
@@ -152,7 +152,7 @@ class VisitController extends BaseController
 
     /**
      * @OA\Get(
-     *      path="/visits/{id}",
+     *      path="/v1/visits/{id}",
      *      summary="Obtener un registro específico.",
      *      tags={"Visits"},
      *      @OA\Parameter(
@@ -194,7 +194,7 @@ class VisitController extends BaseController
 
     /**
      * @OA\Put(
-     *      path="/visits/{id}",
+     *      path="/v1/visits/{id}",
      *      summary="Actualizar un registro existente.",
      *      tags={"Visits"},
      *      @OA\Parameter(
@@ -276,7 +276,7 @@ class VisitController extends BaseController
 
     /**
      * @OA\Delete(
-     *      path="/visits/{id}",
+     *      path="/v1/visits/{id}",
      *      summary="Eliminar un registro existente.",
      *      tags={"Visits"},
      *      @OA\Parameter(

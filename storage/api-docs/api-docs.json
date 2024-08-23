@@ -7,17 +7,118 @@
     },
     "servers": [
         {
-            "url": "http://localhost:8000/api/v1"
+            "url": "http://localhost:8000/api"
         }
     ],
     "paths": {
-        "/visits": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "Autenticación"
+                ],
+                "summary": "Login de usuario",
+                "description": "Autentica a un usuario y genera un token de acceso. Este token se puede utilizar para la autorización Bearer.",
+                "operationId": "loginUser",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password",
+                                    "device_name"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password123"
+                                    },
+                                    "device_name": {
+                                        "type": "string",
+                                        "example": "MyDevice"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login exitoso. Devuelve un token de acceso.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "type": "string",
+                                            "example": "1|eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjQwMjk4MjA1LCJleHBpcmF0aW9uIjpudWxsLCJleHBpcmF0aW9uX2FjdGl2ZSI6IkFkbWluIiwic3ViX2FjX2F1dG9yIjpudWxsLCJzdWIiOiJhZG1pbiJ9.AF7TFi4kED2W-A9d1lJrZ3sHgMk8wS8fCd9Zz6CykxY"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Login exitoso."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Credenciales incorrectas.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Credenciales incorrectas."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error de validación.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error de validación."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "email": "El campo email es obligatorio."
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/visits": {
             "get": {
                 "tags": [
                     "Visits"
                 ],
                 "summary": "Obtener todos los registros.",
-                "operationId": "3450f5ca3ef3455c944f1ebfcfc55546",
+                "operationId": "bdc5e35d143e4a3600dccf8275847cae",
                 "parameters": [
                     {
                         "name": "per_page",
@@ -70,7 +171,7 @@
                     "Visits"
                 ],
                 "summary": "Crear un nuevo registro.",
-                "operationId": "1dde93402cb52c440ba5ec362ebea34e",
+                "operationId": "c6f31e2a4e1308feb1f12da27bf3374a",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -157,13 +258,13 @@
                 }
             }
         },
-        "/visits/{id}": {
+        "/v1/visits/{id}": {
             "get": {
                 "tags": [
                     "Visits"
                 ],
                 "summary": "Obtener un registro específico.",
-                "operationId": "09856b1c25486e4c1227e8a657253079",
+                "operationId": "cf9f60d5b42e9ab037ef9f860534966e",
                 "parameters": [
                     {
                         "name": "id",
@@ -229,7 +330,7 @@
                     "Visits"
                 ],
                 "summary": "Actualizar un registro existente.",
-                "operationId": "fd8607edff57fa843dd0256b51cdd4c7",
+                "operationId": "826aa1d92a721d7d50f9b12610003539",
                 "parameters": [
                     {
                         "name": "id",
@@ -347,7 +448,7 @@
                     "Visits"
                 ],
                 "summary": "Eliminar un registro existente.",
-                "operationId": "c4ed446e3299eded91ada8595770a0e8",
+                "operationId": "6b4568f0d1804f94fe03889a3a209b8b",
                 "parameters": [
                     {
                         "name": "id",
@@ -397,6 +498,10 @@
         }
     },
     "tags": [
+        {
+            "name": "Autenticación",
+            "description": "Autenticación"
+        },
         {
             "name": "Visits",
             "description": "Visits"
