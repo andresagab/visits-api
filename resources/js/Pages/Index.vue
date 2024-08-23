@@ -1,5 +1,5 @@
 <script setup>
-import { Head, useForm } from '@inertiajs/vue3';
+import { useForm } from '@inertiajs/vue3';
 import BaseLayout from "../Layouts/BaseLayout.vue";
 
 const form = useForm({

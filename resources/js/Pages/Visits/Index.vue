@@ -111,22 +111,24 @@ onMounted(() => {
 </script>
 
 <template>
-    <BaseLayout title="Visits">
+    <BaseLayout title="Visitas">
 
         <template #header>
-            <div class="inline-flex items-center justify-between w-full p-4">
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    Visits
+            <div class="inline-flex items-center justify-between w-full p-6 shadow">
+                <h2 class="font-semibold text-xl text-orange-600 leading-tight">
+                    Visualizador de visitas
                 </h2>
                 <form @submit.prevent="logout">
-                    <button type="submit">Cerrar sesión</button>
+                    <button
+                        type="submit"
+                        class="px-3 py-1 rounded-md hover:bg-gray-100 text-gray-700 transition ease-in-out duration-300"
+                        title="Click para cerrar sesión"
+                    >Cerrar sesión</button>
                 </form>
             </div>
         </template>
 
         <div class="w-full">
-
-            <h1 class="text-2xl lg:text-5xl font-bold text-orange-700 mb-6">Visualizador de visitas</h1>
 
             <div class="flex flex-row gap-6 w-full">
                 <!-- data list -->
