@@ -86,7 +86,7 @@ Puedes acceder a la documentación de la api por medio de la url de tu servidor 
 > - `/app/Http/Controllers/API/LoginController`
 > - `/app/Http/Controllers/API/V1/VisitController`
 
-## FRONTEND
+## Frontend
 
 Puedes acceder al frontend de la aplicación web por medio de la url de tu servidor en la ruta: `/` o `/login`
 
@@ -95,7 +95,7 @@ Puedes acceder al frontend de la aplicación web por medio de la url de tu servi
     - Recuerda que el seeder registra 10 usuarios de prueba.
 - La ruta `/visits` te permite visualizar las visitas registradas en un mapa, además, los registros se muestran paginados.
 
-## CREAR UNA NUEVA VISITA (PROMPT)
+## Crear una nueva visita (PROMPT)
 
 La aplicación cuenta con un comando artisan para crear registros de visitas:
 
